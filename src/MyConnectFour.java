@@ -1,10 +1,11 @@
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class MyConnectFour {
 
-	final BufferedReader input;
-	final char[][] board;
+	private BufferedReader input;
+	private char[][] board;
 	
 	public static void main(String[] args){
 		new MyConnectFour();
@@ -16,18 +17,20 @@ public class MyConnectFour {
 		playGame();
 	}
 
+	// Get user input of column number
 	private String getUserInput(){
 		String toReturn = null;
 		try{
 			toReturn = input.readLine();
 		}
 		catch(Exception e){
+			System.out.println("Please enter a valid number");
 
 		}
 		return toReturn;
 	}
 	
-	private void playGame(){
+	private void playGame() {
 		System.out.println("Welcome to Connect 4");
 		System.out.println("There are 2 players red and yellow");
 		System.out.println("Player 1 is Red, Player 2 is Yellow");
@@ -35,19 +38,19 @@ public class MyConnectFour {
 		System.out.println("A player wins by connecting 4 counters in a row - vertically, horizontally or diagonally");
 		printBoard();
 		boolean win = false;
-		while(!win){
+		while (!win) {
 			// player 1
 			String userInput = getUserInput();
 			int move = Integer.parseInt(userInput);
-			placeCounter('r',move);
+			placeCounter('r', move);
 			boolean hasWon = false;
 			int count = 0;
 			// check horizontal
-			for (char[] chars : board) {
-				for (char aChar : chars) {
-					if (aChar == 'r') {
+			for (int i = 0; i < board.length; i++) {
+				for (int j = 0; j < board[i].length; j++) {
+					if (board[i][j] == 'r') {
 						count = count + 1;
-						if (count > 4) {
+						if (count >= 4) {
 							hasWon = true;
 						}
 					} else {
@@ -58,34 +61,33 @@ public class MyConnectFour {
 			}
 			// check vertical 
 			count = 0;
-			for(int i=0; i<board[0].length; i++){
-				for (char[] chars : board) {
-					if (chars[i] == 'r') {
+			for (int i = 0; i < board[0].length; i++) {
+				for (int j = 0; j < board.length; j++) {
+					if (board[j][i] == 'r') {
 						count = count + 1;
-						if (count > 4) {
+						if (count >= 4) {
 							hasWon = true;
 						}
 					} else {
 						count = 0;
 					}
 				}
-				
+
 			}
 			printBoard();
-			if(hasWon){
+			if (hasWon) {
 				win = true;
-			}
-			else{
+			} else {
 				//player 2
 				userInput = getUserInput();
 				move = Integer.parseInt(userInput);
-				placeCounter('y',move);
+				placeCounter('y', move);
 				hasWon = false;
 				count = 0;
 				// check horizontal
-				for (char[] chars : board) {
-					for (char aChar : chars) {
-						if (aChar == 'y') {
+				for (int i = 0; i < board.length; i++) {
+					for (int j = 0; j < board[i].length; j++) {
+						if (board[i][j] == 'y') {
 							count = count + 1;
 							if (count >= 4) {
 								hasWon = true;
@@ -98,9 +100,9 @@ public class MyConnectFour {
 				}
 				// check vertical 
 				count = 0;
-				for(int i=0; i<board[0].length; i++){
-					for (char[] chars : board) {
-						if (chars[i] == 'y') {
+				for (int i = 0; i < board[0].length; i++) {
+					for (int j = 0; j < board.length; j++) {
+						if (board[j][i] == 'y') {
 							count = count + 1;
 							if (count >= 4) {
 								hasWon = true;
@@ -112,18 +114,19 @@ public class MyConnectFour {
 					count = 0;
 				}
 				printBoard();
-				if(hasWon){
+				if (hasWon) {
 					win = true;
 				}
 			}
-			System.out.println("You Have Won!!!");
+			if (win == true) {
+				System.out.println("You Have Won!!!");
+			}
+
 		}
-		
 	}
 
 
-
-	
+	// Print the board
 	private void printBoard(){
 		for(int i=0; i<board.length-1; i++){
 			for(int j=0; j<board[i].length-1; j++){
@@ -142,26 +145,24 @@ public class MyConnectFour {
 		System.out.println("  1   2   3   4   5   6   7");
 	}
 	
-	private void placeCounter(char player, int position){
-		boolean placed = false;
+	private void placeCounter(char player, int column){
+
+		boolean placed = false;;
 		if(player == 'r'){
-			for(int i=board.length-1; i>=0; i++){
+			for(int i=board.length-2; i>=0; i--){
 				if(!placed){
-					if(board[i][position] == 'y'){
-						// skip
-					}
-					else if(board[i][position] != 'r'){
-						board[i][position] = 'r';
+					if(board[column-1][i] != 'r' && board[column-1][i] != 'y'){
+						board[column-1][i] = 'r';
 						placed = true;
 					}
 				}
 			}
 		}
 		else{
-			for(int i=board.length-1; i>=0; i--){
+			for(int i=board.length-2; i>=0; i--){
 				if(!placed){
-					if(board[i][position-1] != 'y'){
-						board[i][position-1] = 'y';
+					if(board[column-1][i] != 'y' && board[column-1][i] != 'r'){
+						board[column-1][i] = 'y';
 						placed = true;
 					} 
 				}
