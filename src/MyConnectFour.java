@@ -37,7 +37,7 @@ public class MyConnectFour {
 
 	// Methods
 
-	public void checkHorizonal(boolean hasWon, char token){
+	public boolean checkVertical(boolean hasWon, char token){
 		int count = 0;
 		for (int i = 0; i < board.getWidth(); i++) {
 			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
@@ -50,8 +50,8 @@ public class MyConnectFour {
 					count = 0;
 				}
 			}
-
 		}
+		return hasWon;
 	}
 
 	
@@ -72,9 +72,9 @@ public class MyConnectFour {
 			placeCounter(token, move);
 			boolean hasWon = false;
 			int count = 0;
+			// check vertical
+			hasWon = checkVertical(hasWon, token);
 			// check horizontal
-			checkHorizonal(hasWon, token);
-			// check vertical 
 			count = 0;
 			for (int i = 0; i < board.getWidth(); i++) {
 				for (int j = 0; j < board.getWidth(); j++) {
