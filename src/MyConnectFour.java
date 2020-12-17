@@ -108,6 +108,8 @@ public class MyConnectFour {
 				hasWon = false;
 				count = 0;
 				// check horizontal
+				hasWon = checkHorizontal(hasWon,token);
+				/*
 				for (int i = 0; i < board.getWidth(); i++) {
 					for (int j = 0; j < board.getWidth(); j++) {
 						if (board.getBoard()[i][j] == 'y') {
@@ -121,7 +123,10 @@ public class MyConnectFour {
 					}
 					count = 0;
 				}
-				// check vertical 
+				*/
+				// check vertical
+				hasWon = checkVertical(hasWon, token);
+				/*
 				count = 0;
 				for (int i = 0; i < board.getWidth(); i++) {
 					for (int j = 0; j < board.getWidth(); j++) {
@@ -136,6 +141,7 @@ public class MyConnectFour {
 					}
 					count = 0;
 				}
+				 */
 				board.printBoard();
 				if (hasWon) {
 					win = true;
