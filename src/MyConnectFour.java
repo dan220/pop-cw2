@@ -6,7 +6,7 @@ public class MyConnectFour {
 
 	Board board = new Board(6, 6);
 	Player player1 = new Player('r');
-	Player player2 = new Player('y');
+	ComputerPlayer player2 = new ComputerPlayer('y');
 
 	public static void main(String[] args) {
 		new MyConnectFour();
@@ -103,7 +103,7 @@ public class MyConnectFour {
 				win = true;
 			} else {
 				//player 2
-				move = player2.getUserInput();
+				move = player2.getMove();
 				token = player2.getToken();
 				placeCounter(token, move);
 				hasWon = false;

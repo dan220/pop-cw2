@@ -37,6 +37,7 @@ public class Board {
         for(int i=0; i<board.length; i++){
             System.out.print(" " + (i + 1) + " ");
         }
+    System.out.println();
     }
 }
 
