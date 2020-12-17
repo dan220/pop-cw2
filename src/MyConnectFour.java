@@ -4,8 +4,6 @@ import java.io.InputStreamReader;
 
 public class MyConnectFour {
 
-	//private BufferedReader input;
-	//private char[][] board;
 	Board board = new Board(6,6);
 	Player player1 = new Player('r');
 	Player player2 = new  Player('y');
@@ -15,28 +13,10 @@ public class MyConnectFour {
 	}
 
 	public MyConnectFour(){
-		//board = new char[6][7];
-		//input = new BufferedReader(new InputStreamReader(System.in));
 		playGame();
 	}
 
-	// Get user input of column number
-	/*
-	private String getUserInput(){
-		String toReturn = null;
-		try{
-			toReturn = input.readLine();
-		}
-		catch(Exception e){
-			System.out.println("Please enter a valid number");
-
-		}
-		return toReturn;
-	}
-	 */
-
 	// Methods
-
 	public boolean checkVertical(boolean hasWon, char token){
 		int count = 0;
 		for (int i = 0; i < board.getWidth(); i++) {
@@ -84,64 +64,33 @@ public class MyConnectFour {
 		boolean win = false;
 		while (!win) {
 			// player 1
-			//String userInput = getUserInput();
-			//int move = Integer.parseInt(userInput);
 			int move = player1.getUserInput();
 			char token = player1.getToken();
 			placeCounter(token, move);
 			boolean hasWon = false;
-			int count = 0;
+
 			// check vertical for red
 			hasWon = checkVertical(hasWon, token);
+
 			// check horizontal for red
 			hasWon = checkHorizontal(hasWon,token);
+
 			board.printBoard();
 			if (hasWon) {
 				win = true;
 			} else {
 				//player 2
-				//userInput = getUserInput();
-				//move = Integer.parseInt(userInput);
 				move = player2.getUserInput();
 				token = player2.getToken();
 				placeCounter(token, move);
 				hasWon = false;
-				count = 0;
-				// check horizontal
+
+				// check horizontal for yellow
 				hasWon = checkHorizontal(hasWon,token);
-				/*
-				for (int i = 0; i < board.getWidth(); i++) {
-					for (int j = 0; j < board.getWidth(); j++) {
-						if (board.getBoard()[i][j] == 'y') {
-							count = count + 1;
-							if (count >= 4) {
-								hasWon = true;
-							}
-						} else {
 
-						}
-					}
-					count = 0;
-				}
-				*/
-				// check vertical
+				// check vertical for yellow
 				hasWon = checkVertical(hasWon, token);
-				/*
-				count = 0;
-				for (int i = 0; i < board.getWidth(); i++) {
-					for (int j = 0; j < board.getWidth(); j++) {
-						if (board.getBoard()[j][i] == 'y') {
-							count = count + 1;
-							if (count >= 4) {
-								hasWon = true;
-							}
-						} else {
 
-						}
-					}
-					count = 0;
-				}
-				 */
 				board.printBoard();
 				if (hasWon) {
 					win = true;
@@ -154,29 +103,6 @@ public class MyConnectFour {
 		}
 	}
 
-
-	// Print the board
-	/*
-	private void printBoard(){
-		for(int i=0; i<board.length-1; i++){
-			for(int j=0; j<board[i].length-1; j++){
-				if(board[j][i] == 'r'){
-					System.out.print("| r ");
-				}
-				else if(board[j][i] == 'y'){
-					System.out.print("| y ");
-				}
-				else{
-					System.out.print("|   ");
-				}
-			}
-			System.out.println("|");
-		}
-		System.out.println("  1   2   3   4   5   6   7");
-	}
-	*/
-
-	
 	private void placeCounter(char player, int column){
 
 		boolean placed = false;;
