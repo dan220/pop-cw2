@@ -4,20 +4,20 @@ import java.io.InputStreamReader;
 
 public class MyConnectFour {
 
-	Board board = new Board(6,6);
+	Board board = new Board(6, 6);
 	Player player1 = new Player('r');
-	Player player2 = new  Player('y');
-	
-	public static void main(String[] args){
+	Player player2 = new Player('y');
+
+	public static void main(String[] args) {
 		new MyConnectFour();
 	}
 
-	public MyConnectFour(){
+	public MyConnectFour() {
 		playGame();
 	}
 
 	// Methods
-	public boolean checkVertical(boolean hasWon, char token){
+	public boolean checkVertical(boolean hasWon, char token) {
 		int count = 0;
 		for (int i = 0; i < board.getWidth(); i++) {
 			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
@@ -34,7 +34,7 @@ public class MyConnectFour {
 		return hasWon;
 	}
 
-	public boolean checkHorizontal(boolean hasWon, char token){
+	public boolean checkHorizontal(boolean hasWon, char token) {
 		int count = 0;
 		for (int i = 0; i < board.getWidth(); i++) {
 			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
@@ -51,9 +51,32 @@ public class MyConnectFour {
 		return hasWon;
 	}
 
+	private void placeCounter(char player, int column) {
+
+		boolean placed = false;
+
+		if (player == 'r') {
+			for (int i = board.getWidth() - 1; i >= 0; i--) {
+				if (!placed) {
+					if (board.getBoard()[column - 1][i] != 'r' && board.getBoard()[column - 1][i] != 'y') {
+						board.getBoard()[column - 1][i] = 'r';
+						placed = true;
+					}
+				}
+			}
+		} else {
+			for (int i = board.getWidth() - 1; i >= 0; i--) {
+				if (!placed) {
+					if (board.getBoard()[column - 1][i] != 'y' && board.getBoard()[column - 1][i] != 'r') {
+						board.getBoard()[column - 1][i] = 'y';
+						placed = true;
+					}
+				}
+			}
+		}
+	}
 
 
-	
 	private void playGame() {
 		System.out.println("Welcome to Connect 4");
 		System.out.println("There are 2 players red and yellow");
@@ -73,7 +96,7 @@ public class MyConnectFour {
 			hasWon = checkVertical(hasWon, token);
 
 			// check horizontal for red
-			hasWon = checkHorizontal(hasWon,token);
+			hasWon = checkHorizontal(hasWon, token);
 
 			board.printBoard();
 			if (hasWon) {
@@ -86,7 +109,7 @@ public class MyConnectFour {
 				hasWon = false;
 
 				// check horizontal for yellow
-				hasWon = checkHorizontal(hasWon,token);
+				hasWon = checkHorizontal(hasWon, token);
 
 				// check vertical for yellow
 				hasWon = checkVertical(hasWon, token);
@@ -102,29 +125,6 @@ public class MyConnectFour {
 
 		}
 	}
-
-	private void placeCounter(char player, int column){
-
-		boolean placed = false;;
-		if(player == 'r'){
-			for(int i= board.getWidth()-1; i>=0; i--){
-				if(!placed){
-					if(board.getBoard()[column-1][i] != 'r' && board.getBoard()[column-1][i] != 'y'){
-						board.getBoard()[column-1][i] = 'r';
-						placed = true;
-					}
-				}
-			}
-		}
-		else{
-			for(int i=board.getWidth()-1; i>=0; i--){
-				if(!placed){
-					if(board.getBoard()[column-1][i] != 'y' && board.getBoard()[column-1][i] != 'r'){
-						board.getBoard()[column-1][i] = 'y';
-						placed = true;
-					} 
-				}
-			}
-		}
-	}
 }
+
+

@@ -19,7 +19,7 @@ public class Player {
         try{
             return Integer.parseInt(this.in.readLine());
         }
-        catch(Exception e){
+        catch(Exception ArrayIndexOutOfBoundsException){
             System.out.println("Please enter a valid number");
         }
         return 0;
