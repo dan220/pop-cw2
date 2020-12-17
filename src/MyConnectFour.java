@@ -4,9 +4,11 @@ import java.io.InputStreamReader;
 
 public class MyConnectFour {
 
-	private BufferedReader input;
+	//private BufferedReader input;
 	//private char[][] board;
 	Board board = new Board(6,6);
+	Player player1 = new Player('r');
+	Player player2 = new  Player('y');
 	
 	public static void main(String[] args){
 		new MyConnectFour();
@@ -14,11 +16,12 @@ public class MyConnectFour {
 
 	public MyConnectFour(){
 		//board = new char[6][7];
-		input = new BufferedReader(new InputStreamReader(System.in));
+		//input = new BufferedReader(new InputStreamReader(System.in));
 		playGame();
 	}
 
 	// Get user input of column number
+	/*
 	private String getUserInput(){
 		String toReturn = null;
 		try{
@@ -30,6 +33,27 @@ public class MyConnectFour {
 		}
 		return toReturn;
 	}
+	 */
+
+	// Methods
+
+	public void checkHorizonal(boolean hasWon, char token){
+		int count = 0;
+		for (int i = 0; i < board.getWidth(); i++) {
+			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
+				if (board.getBoard()[i][j] == token) {
+					count = count + 1;
+					if (count >= 4) {
+						hasWon = true;
+					}
+				} else {
+					count = 0;
+				}
+			}
+
+		}
+	}
+
 	
 	private void playGame() {
 		System.out.println("Welcome to Connect 4");
@@ -41,25 +65,15 @@ public class MyConnectFour {
 		boolean win = false;
 		while (!win) {
 			// player 1
-			String userInput = getUserInput();
-			int move = Integer.parseInt(userInput);
-			placeCounter('r', move);
+			//String userInput = getUserInput();
+			//int move = Integer.parseInt(userInput);
+			int move = player1.getUserInput();
+			char token = player1.getToken();
+			placeCounter(token, move);
 			boolean hasWon = false;
 			int count = 0;
 			// check horizontal
-			for (int i = 0; i < board.getWidth(); i++) {
-				for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
-					if (board.getBoard()[i][j] == 'r') {
-						count = count + 1;
-						if (count >= 4) {
-							hasWon = true;
-						}
-					} else {
-						count = 0;
-					}
-				}
-
-			}
+			checkHorizonal(hasWon, token);
 			// check vertical 
 			count = 0;
 			for (int i = 0; i < board.getWidth(); i++) {
@@ -80,9 +94,11 @@ public class MyConnectFour {
 				win = true;
 			} else {
 				//player 2
-				userInput = getUserInput();
-				move = Integer.parseInt(userInput);
-				placeCounter('y', move);
+				//userInput = getUserInput();
+				//move = Integer.parseInt(userInput);
+				move = player2.getUserInput();
+				token = player2.getToken();
+				placeCounter(token, move);
 				hasWon = false;
 				count = 0;
 				// check horizontal
