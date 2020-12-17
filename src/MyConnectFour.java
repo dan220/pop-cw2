@@ -54,6 +54,25 @@ public class MyConnectFour {
 		return hasWon;
 	}
 
+	public boolean checkHorizontal(boolean hasWon, char token){
+		int count = 0;
+		for (int i = 0; i < board.getWidth(); i++) {
+			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
+				if (board.getBoard()[j][i] == token) {
+					count = count + 1;
+					if (count >= 4) {
+						hasWon = true;
+					}
+				} else {
+					count = 0;
+				}
+			}
+		}
+		return hasWon;
+	}
+
+
+
 	
 	private void playGame() {
 		System.out.println("Welcome to Connect 4");
@@ -72,23 +91,10 @@ public class MyConnectFour {
 			placeCounter(token, move);
 			boolean hasWon = false;
 			int count = 0;
-			// check vertical
+			// check vertical for red
 			hasWon = checkVertical(hasWon, token);
-			// check horizontal
-			count = 0;
-			for (int i = 0; i < board.getWidth(); i++) {
-				for (int j = 0; j < board.getWidth(); j++) {
-					if (board.getBoard()[j][i] == 'r') {
-						count = count + 1;
-						if (count >= 4) {
-							hasWon = true;
-						}
-					} else {
-						count = 0;
-					}
-				}
-
-			}
+			// check horizontal for red
+			hasWon = checkHorizontal(hasWon,token);
 			board.printBoard();
 			if (hasWon) {
 				win = true;
