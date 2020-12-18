@@ -6,7 +6,7 @@ public class MyConnectFour {
 
 	Board board = new Board(6, 6);
 	HumanPlayer player1 = new HumanPlayer('r');
-	ComputerPlayer player2 = new ComputerPlayer('y');
+	HumanPlayer player2 = new HumanPlayer('y');
 
 	public static void main(String[] args) {
 		new MyConnectFour();
@@ -40,6 +40,58 @@ public class MyConnectFour {
 			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
 				if (board.getBoard()[j][i] == token) {
 					count = count + 1;
+					if (count >= 4) {
+						hasWon = true;
+					}
+				} else {
+					count = 0;
+				}
+			}
+		}
+		return hasWon;
+	}
+
+	public boolean checkNegativeDiagonal(boolean hasWon, char token) {
+		int count = 0;
+		for (int i = 0; i < board.getWidth(); i++) {
+			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
+				if (board.getBoard()[i][j] == token && count == 0 && i >= 3  && j >= 3) {
+					count = count + 1;
+					if (board.getBoard()[i-1][j-1] == token) {
+						count = count + 1;
+						if (board.getBoard()[i-2][j-2] == token) {
+							count = count + 1;
+							if (board.getBoard()[i-3][j-3] == token) {
+								count = count + 1;
+							}
+						}
+					}
+					if (count >= 4) {
+						hasWon = true;
+					}
+				} else {
+					count = 0;
+				}
+			}
+		}
+		return hasWon;
+	}
+
+	public boolean checkPostiveDiagonal(boolean hasWon, char token) {
+		int count = 0;
+		for (int i = 0; i < board.getWidth(); i++) {
+			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
+				if (board.getBoard()[i][j] == token && count == 0) {
+					count = count + 1;
+					if (board.getBoard()[i+1][j-1] == token) {
+						count = count + 1;
+						if (board.getBoard()[i+2][j-2] == token) {
+							count = count + 1;
+							if (board.getBoard()[i+3][j-3] == token) {
+								count = count + 1;
+							}
+						}
+					}
 					if (count >= 4) {
 						hasWon = true;
 					}
@@ -97,6 +149,12 @@ public class MyConnectFour {
 
 			// check horizontal for red
 			hasWon = checkHorizontal(hasWon, token);
+
+			//check Negative diagonal for red
+			hasWon = checkNegativeDiagonal(hasWon, token);
+
+			// check positive diagonal for red
+			hasWon = checkPostiveDiagonal(hasWon, token);
 
 			board.printBoard();
 			if (hasWon) {
