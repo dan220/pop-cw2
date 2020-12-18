@@ -83,7 +83,7 @@ public class MyConnectFour {
 		for (int i = 0; i < board.getHeight(); i++) {
 			for (int j = 0; j < board.getWidth(); j++) {
 				if (board.getBoard()[i][j] == token && count == 0  &&
-						i <= (Math.floorDiv(board.getHeight(), 2))  && j >= (Math.floorDiv(board.getWidth(), 2))){
+						i < (Math.floorDiv(board.getHeight(), 2))  && j >= (Math.floorDiv(board.getWidth(), 2))){
 					count = count + 1;
 					if (board.getBoard()[i+1][j-1] == token) {
 						count = count + 1;
@@ -110,6 +110,15 @@ public class MyConnectFour {
 		boolean placed = false;
 
 		if (player == 'r') {
+			boolean falsePlace = true;
+			while(falsePlace) {
+				if (board.getBoard()[0][column - 1] == 'r' || board.getBoard()[0][column - 1] == 'y' ) {
+					System.out.println("Can't place counter in this column. You lose your turn.");
+					break;
+				} else {
+					falsePlace = false;
+				}
+			}
 			for (int i = board.getHeight() - 1; i >= 0; i--) {
 				if (!placed) {
 					if (board.getBoard()[i][column-1] != 'r' && board.getBoard()[i][column-1] !=
