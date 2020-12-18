@@ -6,7 +6,7 @@ public class MyConnectFour {
 
 	static Board board = new Board(6, 6);
 	HumanPlayer player1 = new HumanPlayer('r');
-	HumanPlayer player2 = new HumanPlayer('y');
+	ComputerPlayer player2 = new ComputerPlayer('y');
 
 	public static void main(String[] args) {
 		new MyConnectFour();
@@ -82,7 +82,8 @@ public class MyConnectFour {
 		int count = 0;
 		for (int i = 0; i < board.getHeight(); i++) {
 			for (int j = 0; j < board.getWidth(); j++) {
-				if (board.getBoard()[i][j] == token && count == 0  && i <= 3  && j >= 3) {
+				if (board.getBoard()[i][j] == token && count == 0  &&
+						i <= (Math.floorDiv(board.getHeight(), 2))  && j >= (Math.floorDiv(board.getWidth(), 2))){
 					count = count + 1;
 					if (board.getBoard()[i+1][j-1] == token) {
 						count = count + 1;
@@ -156,7 +157,7 @@ public class MyConnectFour {
 			hasWon = checkNegativeDiagonal(hasWon, token);
 
 			// check positive diagonal for red
-			//hasWon = checkPostiveDiagonal(hasWon, token);
+			hasWon = checkPostiveDiagonal(hasWon, token);
 
 			board.printBoard();
 			if (hasWon) {
@@ -178,7 +179,7 @@ public class MyConnectFour {
 				hasWon = checkNegativeDiagonal(hasWon, token);
 
 				// check positive diagonal for yellow
-				//hasWon = checkPostiveDiagonal(hasWon, token);
+				hasWon = checkPostiveDiagonal(hasWon, token);
 
 				board.printBoard();
 				if (hasWon) {

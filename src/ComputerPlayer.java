@@ -10,6 +10,6 @@ public class ComputerPlayer extends Player {
 
     // Generates a random number for computer player between 1 and 6
     public int getMove() {
-        return this.random.nextInt(5) + 1;
+        return this.random.nextInt(MyConnectFour.board.getWidth()) + 1;
     }
 }
