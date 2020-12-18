@@ -4,7 +4,9 @@ import java.io.InputStreamReader;
 
 public class MyConnectFour {
 
-	static Board board = new Board(6, 6);
+	/* Board works best for any height but widths up to and including 10. Game still works past widths of 10 but numbers
+	at the bottom don't match the columns */
+	static Board board = new Board(6, 7);
 	HumanPlayer player1 = new HumanPlayer('r');
 	ComputerPlayer player2 = new ComputerPlayer('y');
 
@@ -149,7 +151,8 @@ public class MyConnectFour {
 		System.out.println("A player wins by connecting 4 counters in a row - vertically, horizontally or diagonally");
 		board.printBoard();
 		boolean win = false;
-		while (!win) {
+		boolean computerWin = false;
+		while (!win && !computerWin) {
 			// player 1
 			int move = player1.getMove();
 			char token = player1.getToken();
@@ -171,6 +174,9 @@ public class MyConnectFour {
 			board.printBoard();
 			if (hasWon) {
 				win = true;
+			if (win){
+				System.out.println("You Have Won!!!");
+			}
 			} else {
 				//player 2
 				move = player2.getMove();
@@ -192,11 +198,11 @@ public class MyConnectFour {
 
 				board.printBoard();
 				if (hasWon) {
-					win = true;
+					computerWin = true;
+				if (computerWin) {
+					System.out.println("Computer has Won!!!");
 				}
 			}
-			if (win == true) {
-				System.out.println("You Have Won!!!");
 			}
 
 		}
