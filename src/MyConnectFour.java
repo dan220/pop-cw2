@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class MyConnectFour {
 
-	static Board board = new Board(4, 8);
+	static Board board = new Board(6, 6);
 	HumanPlayer player1 = new HumanPlayer('r');
 	HumanPlayer player2 = new HumanPlayer('y');
 
@@ -37,7 +37,7 @@ public class MyConnectFour {
 	public boolean checkHorizontal(boolean hasWon, char token) {
 		int count = 0;
 		for (int i = 0; i < board.getHeight(); i++) {
-			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
+			for (int j = 0; j < board.getWidth(); j++) {
 				if (board.getBoard()[i][j] == token) {
 					count = count + 1;
 					if (count >= 4) {
@@ -54,8 +54,9 @@ public class MyConnectFour {
 	public boolean checkNegativeDiagonal(boolean hasWon, char token) {
 		int count = 0;
 		for (int i = 0; i < board.getHeight(); i++) {
-			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
-				if (board.getBoard()[i][j] == token && count == 0 && i >= 3  && j >= 3) {
+			for (int j = 0; j < board.getWidth(); j++) {
+				if (board.getBoard()[i][j] == token && count == 0 &&
+						i >= (Math.floorDiv(board.getHeight(), 2))  && j >= (Math.floorDiv(board.getWidth(), 2))) {
 					count = count + 1;
 					if (board.getBoard()[i-1][j-1] == token) {
 						count = count + 1;
@@ -80,7 +81,7 @@ public class MyConnectFour {
 	public boolean checkPostiveDiagonal(boolean hasWon, char token) {
 		int count = 0;
 		for (int i = 0; i < board.getHeight(); i++) {
-			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
+			for (int j = 0; j < board.getWidth(); j++) {
 				if (board.getBoard()[i][j] == token && count == 0  && i <= 3  && j >= 3) {
 					count = count + 1;
 					if (board.getBoard()[i+1][j-1] == token) {
@@ -152,7 +153,7 @@ public class MyConnectFour {
 			hasWon = checkHorizontal(hasWon, token);
 
 			//check Negative diagonal for red
-			//hasWon = checkNegativeDiagonal(hasWon, token);
+			hasWon = checkNegativeDiagonal(hasWon, token);
 
 			// check positive diagonal for red
 			//hasWon = checkPostiveDiagonal(hasWon, token);
@@ -174,7 +175,7 @@ public class MyConnectFour {
 				hasWon = checkVertical(hasWon, token);
 
 				//check Negative diagonal for yellow
-				//hasWon = checkNegativeDiagonal(hasWon, token);
+				hasWon = checkNegativeDiagonal(hasWon, token);
 
 				// check positive diagonal for yellow
 				//hasWon = checkPostiveDiagonal(hasWon, token);
