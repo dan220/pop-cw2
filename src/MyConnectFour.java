@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class MyConnectFour {
 
-	Board board = new Board(6, 6);
+	Board board = new Board(4, 8);
 	HumanPlayer player1 = new HumanPlayer('r');
 	HumanPlayer player2 = new HumanPlayer('y');
 
@@ -110,8 +110,9 @@ public class MyConnectFour {
 		if (player == 'r') {
 			for (int i = board.getWidth() - 1; i >= 0; i--) {
 				if (!placed) {
-					if (board.getBoard()[column - 1][i] != 'r' && board.getBoard()[column - 1][i] != 'y') {
-						board.getBoard()[column - 1][i] = 'r';
+					if (board.getBoard()[i][column-1] != 'r' && board.getBoard()[i][column-1] !=
+					 'y') {
+						board.getBoard()[i][column-1] = 'r';
 						placed = true;
 					}
 				}
@@ -119,8 +120,8 @@ public class MyConnectFour {
 		} else {
 			for (int i = board.getWidth() - 1; i >= 0; i--) {
 				if (!placed) {
-					if (board.getBoard()[column - 1][i] != 'y' && board.getBoard()[column - 1][i] != 'r') {
-						board.getBoard()[column - 1][i] = 'y';
+					if (board.getBoard()[i][column-1] != 'y' && board.getBoard()[i][column-1] != 'r') {
+						board.getBoard()[i][column-1] = 'y';
 						placed = true;
 					}
 				}

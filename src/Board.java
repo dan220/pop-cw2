@@ -4,8 +4,8 @@ public class Board {
     private char[][] board;
 
     // Constructor that creates board
-    public Board(int width, int height) {
-        board = new char[width][height];
+    public Board(int height, int width) {
+        board = new char[height][width];
     }
 
     // Getter that gets width
@@ -22,10 +22,10 @@ public class Board {
         for(int i=0; i<board.length; i++){
             System.out.print("|");
             for(int j=0; j<board[i].length; j++){
-                if(board[j][i] == 'r'){
+                if(board[i][j] == 'r'){
                     System.out.print("r |");
                 }
-                else if(board[j][i] == 'y'){
+                else if(board[i][j] == 'y'){
                     System.out.print("y |");
                 }
                 else{
@@ -34,8 +34,12 @@ public class Board {
             }
             System.out.println();
         }
+
         for(int i=0; i<board.length; i++){
-            System.out.print(" " + (i + 1) + " ");
+            for(int j=0; j<board[i].length; j++) {
+                System.out.print(" " + (j + 1) + " ");
+            }
+            break;
         }
     System.out.println();
     }
