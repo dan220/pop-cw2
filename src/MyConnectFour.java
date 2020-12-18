@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 public class MyConnectFour {
 
 	Board board = new Board(6, 6);
-	Player player1 = new Player('r');
+	HumanPlayer player1 = new HumanPlayer('r');
 	ComputerPlayer player2 = new ComputerPlayer('y');
 
 	public static void main(String[] args) {
@@ -87,7 +87,7 @@ public class MyConnectFour {
 		boolean win = false;
 		while (!win) {
 			// player 1
-			int move = player1.getUserInput();
+			int move = player1.getMove();
 			char token = player1.getToken();
 			placeCounter(token, move);
 			boolean hasWon = false;
