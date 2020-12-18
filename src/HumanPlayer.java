@@ -5,18 +5,27 @@ public class HumanPlayer extends Player {
 
     private BufferedReader in;
 
-    public HumanPlayer(char token){
+    public HumanPlayer(char token) {
         super(token);
         this.in = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public int getMove(){
-        try{
-            return Integer.parseInt(this.in.readLine());
+    public int getMove() {
+        int number = 1;
+        boolean acceptableInput = false;
+        while (!acceptableInput) {
+            try {
+                number = Integer.parseInt(this.in.readLine());
+                if(number <= 6){
+                    acceptableInput = true;
+                }
+                else{
+                    System.out.println("Please enter a number which matches a column number");
+                }
+            } catch (Exception e) {
+                System.out.println("Please enter a number");
+            }
         }
-        catch(Exception ArrayIndexOutOfBoundsException){
-            System.out.println("Please enter a valid number");
-        }
-        return 0;
+        return number;
     }
 }
