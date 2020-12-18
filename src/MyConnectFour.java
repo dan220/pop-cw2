@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 public class MyConnectFour {
 
-	Board board = new Board(4, 8);
+	static Board board = new Board(4, 8);
 	HumanPlayer player1 = new HumanPlayer('r');
 	HumanPlayer player2 = new HumanPlayer('y');
 
@@ -20,8 +20,8 @@ public class MyConnectFour {
 	public boolean checkVertical(boolean hasWon, char token) {
 		int count = 0;
 		for (int i = 0; i < board.getWidth(); i++) {
-			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
-				if (board.getBoard()[i][j] == token) {
+			for (int j = 0; j < board.getHeight(); j++) {
+				if (board.getBoard()[j][i] == token) {
 					count = count + 1;
 					if (count >= 4) {
 						hasWon = true;
@@ -36,9 +36,9 @@ public class MyConnectFour {
 
 	public boolean checkHorizontal(boolean hasWon, char token) {
 		int count = 0;
-		for (int i = 0; i < board.getWidth(); i++) {
+		for (int i = 0; i < board.getHeight(); i++) {
 			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
-				if (board.getBoard()[j][i] == token) {
+				if (board.getBoard()[i][j] == token) {
 					count = count + 1;
 					if (count >= 4) {
 						hasWon = true;
@@ -53,7 +53,7 @@ public class MyConnectFour {
 
 	public boolean checkNegativeDiagonal(boolean hasWon, char token) {
 		int count = 0;
-		for (int i = 0; i < board.getWidth(); i++) {
+		for (int i = 0; i < board.getHeight(); i++) {
 			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
 				if (board.getBoard()[i][j] == token && count == 0 && i >= 3  && j >= 3) {
 					count = count + 1;
@@ -79,7 +79,7 @@ public class MyConnectFour {
 
 	public boolean checkPostiveDiagonal(boolean hasWon, char token) {
 		int count = 0;
-		for (int i = 0; i < board.getWidth(); i++) {
+		for (int i = 0; i < board.getHeight(); i++) {
 			for (int j = 0; j < board.getWidth(); j++) {//board.getWidth() needs to be board.getHeight()
 				if (board.getBoard()[i][j] == token && count == 0  && i <= 3  && j >= 3) {
 					count = count + 1;
@@ -108,7 +108,7 @@ public class MyConnectFour {
 		boolean placed = false;
 
 		if (player == 'r') {
-			for (int i = board.getWidth() - 1; i >= 0; i--) {
+			for (int i = board.getHeight() - 1; i >= 0; i--) {
 				if (!placed) {
 					if (board.getBoard()[i][column-1] != 'r' && board.getBoard()[i][column-1] !=
 					 'y') {
@@ -118,7 +118,7 @@ public class MyConnectFour {
 				}
 			}
 		} else {
-			for (int i = board.getWidth() - 1; i >= 0; i--) {
+			for (int i = board.getHeight() - 1; i >= 0; i--) {
 				if (!placed) {
 					if (board.getBoard()[i][column-1] != 'y' && board.getBoard()[i][column-1] != 'r') {
 						board.getBoard()[i][column-1] = 'y';
@@ -152,10 +152,10 @@ public class MyConnectFour {
 			hasWon = checkHorizontal(hasWon, token);
 
 			//check Negative diagonal for red
-			hasWon = checkNegativeDiagonal(hasWon, token);
+			//hasWon = checkNegativeDiagonal(hasWon, token);
 
 			// check positive diagonal for red
-			hasWon = checkPostiveDiagonal(hasWon, token);
+			//hasWon = checkPostiveDiagonal(hasWon, token);
 
 			board.printBoard();
 			if (hasWon) {
@@ -174,10 +174,10 @@ public class MyConnectFour {
 				hasWon = checkVertical(hasWon, token);
 
 				//check Negative diagonal for yellow
-				hasWon = checkNegativeDiagonal(hasWon, token);
+				//hasWon = checkNegativeDiagonal(hasWon, token);
 
 				// check positive diagonal for yellow
-				hasWon = checkPostiveDiagonal(hasWon, token);
+				//hasWon = checkPostiveDiagonal(hasWon, token);
 
 				board.printBoard();
 				if (hasWon) {

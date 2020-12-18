@@ -8,9 +8,21 @@ public class Board {
         board = new char[height][width];
     }
 
+    // Getter that gets height
+    public int getHeight(){
+        return board.length;
+    }
+
     // Getter that gets width
     public int getWidth(){
-        return board.length;
+        int count = 0;
+        for(int i=0; i<board.length; i++){
+            for(int j=0; j<board[i].length; j++) {
+                count++;
+            }
+            break;
+        }
+        return count;
     }
 
     // Getter that bets board

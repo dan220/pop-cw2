@@ -16,7 +16,7 @@ public class HumanPlayer extends Player {
         while (!acceptableInput) {
             try {
                 number = Integer.parseInt(this.in.readLine());
-                if(number <= 6){
+                if(number <= MyConnectFour.board.getWidth()){
                     acceptableInput = true;
                 }
                 else{
